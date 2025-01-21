@@ -13,8 +13,9 @@
 //         })
 // }
 
+
+// pulling the data from the API to use later in code
 async function fetchProducts() {
-    // debugger;
     try {
         const response = await fetch("http://localhost:3000/api/products");
 
@@ -28,19 +29,36 @@ async function fetchProducts() {
         return [];
     }
 }
-
+//todo 1 
 async function renderProducts() {
+    const productContainer = document.getElementById('items');
     const products = await fetchProducts();
     console.log(products);  
+    products.forEach(product => {
+        console.log(product);
+        let productElement = document.createElement('div');
+        productElement.innerHTML = `
+        <a href="./product.html?id=${product._id}">
+            <article>
+              <img src="${product.imageUrl}" alt="${product.altTxt}">
+             <h3 class="productName">${product.name}</h3>
+             <p class="productDescription">${product.description}</p>
+            </article>
+          </a>
+        `;    
+        productContainer.appendChild(productElement);
+    });
 
 }
 
+renderProducts();
 
-async function displaySingleProduct(id) {
-    const singleProduct = fetch singleProduct();
-    console.log(singleProduct)
 
-}
+// async function displaySingleProduct(id) {
+//     const singleProduct = fetch singleProduct();
+//     console.log(singleProduct)
+
+// }
 // document.createElement
 // appendChild 
 // textContent
