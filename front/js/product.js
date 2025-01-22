@@ -18,6 +18,7 @@
 // pass that variable into fetch product 
 // use that variable in fetch URL 
 
+
 // pulling the data from the API to use later in code
 async function fetchProduct() {
     try {

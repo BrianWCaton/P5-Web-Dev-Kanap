@@ -37,6 +37,7 @@ async function renderProducts() {
     products.forEach(product => {
         console.log(product);
         let productElement = document.createElement('div');
+        productElement.classList.add('product');
         productElement.innerHTML = `
         <a href="./product.html?id=${product._id}">
             <article>
