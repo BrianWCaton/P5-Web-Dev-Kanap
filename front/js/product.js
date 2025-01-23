@@ -18,16 +18,17 @@ function getProductIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
-
+const productId = getProductIdFromUrl();
+console.log(productId);
 // create variable and get ID param from those params 
 // pass that variable into fetch product 
 // use that variable in fetch URL 
 
 
 // pulling the data from the API to use later in code
-async function fetchProduct() {
+async function fetchProduct(productId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/products/${product._id}`);
+        const response = await fetch(`http://localhost:3000/api/products/${productId}`);
         const product = await response.json();
         console.log(product);
         return product;
@@ -37,7 +38,7 @@ async function fetchProduct() {
         return null;
     }
 }
-
+fetchProduct(productId);
 
 async function renderProductDetails() {
     const productId = getProductIdFromUrl();
@@ -50,10 +51,15 @@ async function renderProductDetails() {
     console.log(product); // Render product details here
 }
 
-
+let productDescription = document.getElementbyId
+// function render prouduct ()
+//look into html for all variables you need 
+// set each const equal to info from api 
+// const product = await fetchProduct(productId);
+// ex descritption getElement bY id desctiption.textContent = "alkdnaflknd";
 
 //todo 1 
-// async function renderProducts() {
+// async function renderProduct() {
 //     const productContainer = document.getElementById('items');
 //     const products = await fetchProducts();
 //     console.log(products);  
