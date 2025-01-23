@@ -14,6 +14,11 @@
 // }
 // 
 // create variable and get URL Search Params from URL 
+function getProductIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+
 // create variable and get ID param from those params 
 // pass that variable into fetch product 
 // use that variable in fetch URL 
@@ -23,38 +28,51 @@
 async function fetchProduct() {
     try {
         const response = await fetch(`http://localhost:3000/api/products/${product._id}`);
-
-        //console.log(response);
         const product = await response.json();
         console.log(product);
         return product;
 
     } catch (error) {
         console.error("error fetching product", error.message);
-        return [];
+        return null;
     }
 }
-//todo 1 
-async function renderProducts() {
-    const productContainer = document.getElementById('items');
-    const products = await fetchProducts();
-    console.log(products);  
-    products.forEach(product => {
-        console.log(product);
-        let productElement = document.createElement('div');
-        productElement.innerHTML = `
-        <a href="./product.html?id=${product._id}">
-            <article>
-              <img src="${product.imageUrl}" alt="${product.altTxt}">
-             <h3 class="productName">${product.name}</h3>
-             <p class="productDescription">${product.description}</p>
-            </article>
-          </a>
-        `;    
-        productContainer.appendChild(productElement);
-    });
 
+
+async function renderProductDetails() {
+    const productId = getProductIdFromUrl();
+    if (!productId) {
+        console.error("No product ID found in URL.");
+        return;
+    }
+    const product = await fetchProduct(productId);
+    if (!product) return;
+    console.log(product); // Render product details here
 }
+
+
+
+//todo 1 
+// async function renderProducts() {
+//     const productContainer = document.getElementById('items');
+//     const products = await fetchProducts();
+//     console.log(products);  
+//     products.forEach(product => {
+//         console.log(product);
+//         let productElement = document.createElement('div');
+//         productElement.innerHTML = `
+//         <a href="./product.html?id=${product._id}">
+//             <article>
+//               <img src="${product.imageUrl}" alt="${product.altTxt}">
+//              <h3 class="productName">${product.name}</h3>
+//              <p class="productDescription">${product.description}</p>
+//             </article>
+//           </a>
+//         `;    
+//         productContainer.appendChild(productElement);
+//     });
+
+// }
 
 renderProducts();
 
