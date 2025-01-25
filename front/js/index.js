@@ -57,14 +57,8 @@ renderProducts();
 
 // async function displaySingleProduct(id) {
 //     const singleProduct = fetch singleProduct();
-//     console.log(singleProduct)
+//     console.log(singleProduct)}
 
-// }
-// document.createElement
-// appendChild 
-// textContent
-// for each loop
-// select and modify img and src 
 
 // # 3 add to cart function 
 async function addToCart(product) {

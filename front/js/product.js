@@ -12,7 +12,11 @@
 //             console.error(error);
 //         })
 // }
-// 
+
+
+
+
+
 // create variable and get URL Search Params from URL 
 function getProductIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -51,12 +55,44 @@ async function renderProductDetails() {
     console.log(product); // Render product details here
 }
 
-let productDescription = document.getElementbyId
 // function render prouduct ()
-//look into html for all variables you need 
-// set each const equal to info from api 
-// const product = await fetchProduct(productId);
-// ex descritption getElement bY id desctiption.textContent = "alkdnaflknd";
+ 
+
+const itemImgDiv = document.querySelector('.item__img'); // Div for the image
+const title = document.getElementById('title'); // Product title
+const price = document.getElementById('price'); // Product price
+const description = document.getElementById('description'); // Product description
+const colorSelect = document.getElementById('colors'); // Dropdown for color selection
+const descriptionTitle = document.querySelector('.item__content__description__title'); // Description title
+const itemContent = document.querySelector('.item__content'); // Main content div
+let product = {
+    altTxt: "Photo of a blue sofa, two seats",
+    colors: ["Blue", "White", "Black"],
+    description: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    imageUrl: "http://localhost:3000/images/kanap01.jpeg",
+    name: "Kanap Sinopé",
+    price: 1849,
+    _id: "107fb5b75607497b96722bda5b504926",
+  };
+
+let productName = product.name; // "Kanap Sinopé"
+let productPrice = product.price; // 1849
+let productDescription = product.description; // Description text
+let productImageUrl = product.imageUrl; // Image URL
+let productAltText = product.altTxt; // Alt text for the image
+let productColors = product.colors;
+
+console.log("Name:", productName);
+console.log("Price:", productPrice);
+console.log("Description:", productDescription);
+console.log("Image URL:", productImageUrl);
+console.log("Alt Text:", productAltText);
+console.log("Colors:", productColors);
+
+
+
+
+
 
 //todo 1 
 // async function renderProduct() {
@@ -80,7 +116,7 @@ let productDescription = document.getElementbyId
 
 // }
 
-renderProducts();
+
 
 
 
