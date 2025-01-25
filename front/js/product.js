@@ -90,7 +90,32 @@ console.log("Alt Text:", productAltText);
 console.log("Colors:", productColors);
 
 
+ // Populate title
+ title.textContent = product.name;
 
+ // Populate price
+ price.textContent = product.price;
+
+ // Populate description
+ description.textContent = product.description;
+
+ // Populate color dropdown
+ colorSelect.innerHTML = ''; // Clear existing options
+ const defaultOption = document.createElement('option');
+ defaultOption.value = '';
+ defaultOption.textContent = '--Please, select a color--';
+ colorSelect.appendChild(defaultOption);
+
+ product.colors.forEach((color) => {
+   const option = document.createElement('option');
+   option.value = color;
+   option.textContent = color;
+   colorSelect.appendChild(option);
+ });
+
+ console.log("Product details rendered successfully.");
+ renderProductDetails();
+ console.log(product.imageUrl);
 
 
 
