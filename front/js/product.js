@@ -58,7 +58,7 @@ async function renderProductDetails() {
 // function render prouduct ()
  
 
-const itemImgDiv = document.querySelector('.item__img'); // Div for the image
+const itemImg = document.querySelector('.item__img img'); // Div for the image
 const title = document.getElementById('title'); // Product title
 const price = document.getElementById('price'); // Product price
 const description = document.getElementById('description'); // Product description
@@ -82,12 +82,15 @@ let productImageUrl = product.imageUrl; // Image URL
 let productAltText = product.altTxt; // Alt text for the image
 let productColors = product.colors;
 
+itemImg.src = productImageUrl
 console.log("Name:", productName);
 console.log("Price:", productPrice);
 console.log("Description:", productDescription);
 console.log("Image URL:", productImageUrl);
 console.log("Alt Text:", productAltText);
 console.log("Colors:", productColors);
+
+
 
 
  // Populate title
