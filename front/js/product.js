@@ -48,11 +48,10 @@ function getProductIdFromUrl() {
     description.textContent = product.description;
   
     // Populate color dropdown
-    colorSelect.innerHTML = ""; // Clear existing options
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "--Please, select a color--";
-    colorSelect.appendChild(defaultOption);
+    // const defaultOption = document.createElement("option");
+    // defaultOption.value = "";
+    // defaultOption.textContent = "--Please, select a color--";
+    // colorSelect.appendChild(defaultOption);
   
     product.colors.forEach((color) => {
       const option = document.createElement("option");
@@ -67,3 +66,45 @@ function getProductIdFromUrl() {
   // Initialize rendering
   renderProductDetails();
   
+
+  const addCartButton = document.querySelector;
+  addCartButton.addEventListener('click') =>{
+
+  }
+  async function addToCart(product) {
+    try {
+      // Fetch the product data from the API
+      const response = await fetch(`http://localhost:3000/api/products/${product.id}`);
+      
+      if (!response.ok) {
+        throw new Error(`Error fetching product: ${response.statusText}`);
+      }
+  
+      const productData = await response.json();
+  
+      // Retrieve the current cart from local storage
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+      // Check if the product is already in the cart
+      const existingProduct = cart.find(item => item.id === product.id);
+  
+      if (existingProduct) {
+        // If the product exists, increase the quantity
+        existingProduct.quantity += 1;
+      } else {
+        // If the product does not exist, add it to the cart
+        cart.push({ ...productData, quantity: 1 });
+      }
+  
+      // Save the updated cart back to local storage
+      localStorage.setItem("cart", JSON.stringify(cart));
+  
+      // Update the cart count (assuming you have a way to display this)
+      const cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
+      localStorage.setItem("cartCount", cartCount + 1);
+  
+      console.log(`Product "${productData.name}" added to the cart successfully.`);
+    } catch (error) {
+      console.error("Failed to add product to cart:", error);
+    }
+  }
