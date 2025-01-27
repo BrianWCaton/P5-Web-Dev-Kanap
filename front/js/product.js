@@ -80,10 +80,10 @@ function getProductIdFromUrl() {
     const existingItem = cart.find(item => item.productId === productId && item.selectedColor === selectedColor);
 
     if (existingItem) {
-        // Update quantity if the item exists
+      
         existingItem.quantity += quantity;
     } else {
-        // Add new item to the cart
+     
         cart.push({
             productId,
             productName,
@@ -93,16 +93,15 @@ function getProductIdFromUrl() {
         });
     }
 
-    // Save the updated cart back to local storage
     localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Calculate the total price
+    
     calculateTotal(cart);
 
     console.log("Item added to cart successfully!");
 }
 
-// Function to calculate the total price of items in the cart
+
 function calculateTotal(cart) {
     const total = cart.reduce((sum, item) => sum + item.productPrice * item.quantity, 0);
     console.log(`Total Price: €${total.toFixed(2)}`);
