@@ -48,11 +48,10 @@ function getProductIdFromUrl() {
     description.textContent = product.description;
   
     // Populate color dropdown
-    colorSelect.innerHTML = ""; // Clear existing options
-    const defaultOption = document.createElement("option");
-    defaultOption.value = "";
-    defaultOption.textContent = "--Please, select a color--";
-    colorSelect.appendChild(defaultOption);
+    // const defaultOption = document.createElement("option");
+    // defaultOption.value = "";
+    // defaultOption.textContent = "--Please, select a color--";
+    // colorSelect.appendChild(defaultOption);
   
     product.colors.forEach((color) => {
       const option = document.createElement("option");
@@ -68,42 +67,44 @@ function getProductIdFromUrl() {
   renderProductDetails();
   
 
-  function addToCart(productId, productName, productPrice, selectedColor, quantity) {
-    if (!selectedColor || quantity <= 0) {
-        console.error("Invalid color or quantity. Please select a color and specify a valid quantity.");
-        return;
-    }
+  const addCartButton = document.querySelector;
+  addCartButton.addEventListener('click') =>{
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-
-    const existingItem = cart.find(item => item.productId === productId && item.selectedColor === selectedColor);
-
-    if (existingItem) {
+  }
+  async function addToCart(product) {
+    try {
+      // Fetch the product data from the API
+      const response = await fetch(`http://localhost:3000/api/products/${product.id}`);
       
-        existingItem.quantity += quantity;
-    } else {
-     
-        cart.push({
-            productId,
-            productName,
-            productPrice,
-            selectedColor,
-            quantity
-        });
+      if (!response.ok) {
+        throw new Error(`Error fetching product: ${response.statusText}`);
+      }
+  
+      const productData = await response.json();
+  
+      // Retrieve the current cart from local storage
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+      // Check if the product is already in the cart
+      const existingProduct = cart.find(item => item.id === product.id);
+  
+      if (existingProduct) {
+        // If the product exists, increase the quantity
+        existingProduct.quantity += 1;
+      } else {
+        // If the product does not exist, add it to the cart
+        cart.push({ ...productData, quantity: 1 });
+      }
+  
+      // Save the updated cart back to local storage
+      localStorage.setItem("cart", JSON.stringify(cart));
+  
+      // Update the cart count (assuming you have a way to display this)
+      const cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
+      localStorage.setItem("cartCount", cartCount + 1);
+  
+      console.log(`Product "${productData.name}" added to the cart successfully.`);
+    } catch (error) {
+      console.error("Failed to add product to cart:", error);
     }
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    
-    calculateTotal(cart);
-
-    console.log("Item added to cart successfully!");
-}
-
-
-function calculateTotal(cart) {
-    const total = cart.reduce((sum, item) => sum + item.productPrice * item.quantity, 0);
-    console.log(`Total Price: €${total.toFixed(2)}`);
-    return total;
-}
+  }
