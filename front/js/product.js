@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function () {
   
-
+  const colorSelect = document.getElementById("colors");
+  const itemQuantity = document.getElementById('quantity');
   
   // Get product ID from URL
   function getProductIdFromUrl() {
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       const title = document.getElementById("title");
       const price = document.getElementById("price");
       const description = document.getElementById("description");
-      const colorSelect = document.getElementById("colors");
+
     
       // Set product details
       itemImg.src = product.imageUrl;
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         option.value = color;
         option.textContent = color;
         colorSelect.appendChild(option);
+        
       });
     
       console.log("Product details rendered successfully.");
@@ -93,8 +95,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             id: product._id,
             name: product.name,
             price: product.price,
-            color: 'green',
-            quantity: 1
+            color: colorSelect.value,
+            quantity: itemQuantity.value
           });
         }
     
