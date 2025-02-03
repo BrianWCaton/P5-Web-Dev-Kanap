@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             name: product.name,
             price: product.price,
             color: colorSelect.value,
-            quantity: itemQuantity.value
+            quantity: itemQuantity.value || 1 
           });
         }
     
@@ -121,3 +121,5 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   //how to get value of input elements inside the add to cart function to place the information in the cart
   // color and quantity check if id and color match 
+  //wrap cart.push in logic check same color and product id if same color and same ID increase quantity if not same color create new item in cart 
+  // array method to loop through array to check cart if id matches find ways to filter in arrays 
