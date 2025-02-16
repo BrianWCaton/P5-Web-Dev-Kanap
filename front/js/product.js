@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', async function () {
   
-
+const quantityInput = document.getElementById('quantity');
+const itemImg = document.querySelector(".item__img img");
+const title = document.getElementById("title");
+const price = document.getElementById("price");
+const description = document.getElementById("description");
+const colorSelect = document.getElementById("colors");
   
   // Get product ID from URL
   function getProductIdFromUrl() {
@@ -23,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     }
     
+    
     // Render product details
     const productId = getProductIdFromUrl();
     async function renderProductDetails() {
@@ -38,11 +44,7 @@ document.addEventListener('DOMContentLoaded', async function () {
       }
     
       // Update DOM with product details
-      const itemImg = document.querySelector(".item__img img");
-      const title = document.getElementById("title");
-      const price = document.getElementById("price");
-      const description = document.getElementById("description");
-      const colorSelect = document.getElementById("colors");
+      
     
       // Set product details
       itemImg.src = product.imageUrl;
@@ -73,37 +75,35 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   
 
-    function addToCart(product) {
-
-    
-
-    
+    function addToCart(product, quantity, selectedColor) {   
         // Retrieve the current cart from local storage or create a blank array 
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
     
         // Check if the product is already in the cart
-        const existingProduct = cart.find(item => item.id === product.id);
-    
-        if (existingProduct) {
+        const existingProductIndex = cart.findIndex((item) => item.id === product._id && item.color === selectedColor);
+    console.log('existing product' + existingProductIndex);
+        if (existingProductIndex !== -1) {
           // If the product exists, increase the quantity
-          existingProduct.quantity += 1;
+          cart[existingProductIndex].quantity += quantity;
+          console.log("product exists in cart " + quantity );
         } else {
           // If the product does not exist, add it to the cart id, price, color, quantity, name
           cart.push({
             id: product._id,
             name: product.name,
-            price: product.price,
-            color: 'green',
-            quantity: 1
+            price: product.price, 
+            color: selectedColor,
+            quantity: quantity
           });
+          console.log("cart " + JSON.stringify(cart));
         }
     
         // Save the updated cart back to local storage
         localStorage.setItem("cart", JSON.stringify(cart));
     
-        // Update the cart count (assuming you have a way to display this)
-        const cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
-        localStorage.setItem("cartCount", cartCount + 1);
+        // // Update the cart count (assuming you have a way to display this)
+        // const cartCount = parseInt(localStorage.getItem("cartCount")) || 0;
+        // localStorage.setItem("cartCount", cartCount + 1);
     
         console.log(`Product "${product.name}" added to the cart successfully.`);
 
@@ -111,11 +111,20 @@ document.addEventListener('DOMContentLoaded', async function () {
     const addCartButton = document.getElementById('addToCart');
     const product = await fetchProduct(productId);
     addCartButton.addEventListener('click', function(){
-      addToCart(product);
-      
-
+      const selectedColor = colorSelect.value;
+      const quantity = parseInt(quantityInput.value);
+      addToCart(product, quantity, selectedColor);    
     }); 
+
+ function updateCartTotal() {
+  let cartPrice = document.getElementById('####')
+  
+  
+
+ }   
   });
+
+  
 
   //how to get value of input elements inside the add to cart function to place the information in the cart
   // color and quantity check if id and color match 
