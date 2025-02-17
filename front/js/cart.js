@@ -1,25 +1,18 @@
 
 
 
-const cartDisplay = document.getElementById()
-const cartColor = document.getElementById()
-const cartPrice = document.getElementById()
+// const cartDisplay = document.getElementById()
+// const cartColor = document.getElementById()
+// const cartPrice = document.getElementById()
 
 function getCartFromLocalStorage() {
 
-    const cartData = localStorage.getItem('cart');
- 
-    return cartData ? JSON.parse(cartData) : [];
+return JSON.parse(localStorage.getItem('cart')) || []; 
   }
-  
-
-  function saveCartToLocalStorage() {
-
-    localStorage.setItem('cart', JSON.stringify(cartItems));
-  }
-  
 
   function displayCart() {
+    const cartItems = getCartFromLocalStorage();
+    console.log(cartItems);
     const cartContainer = document.getElementById('cart__items');
     cartContainer.innerHTML = ''; 
   
@@ -34,7 +27,7 @@ function getCartFromLocalStorage() {
   
       article.innerHTML = `
         <div class="cart__item__img">
-          <img src="${item.imgSrc}" alt="Photo of a ${item.name}">
+      <img src="${item.image}" alt="Photo of a ${item.name}">
         </div>
         <div class="cart__item__content">
           <div class="cart__item__content__description">

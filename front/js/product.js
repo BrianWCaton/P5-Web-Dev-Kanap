@@ -6,6 +6,7 @@ const title = document.getElementById("title");
 const price = document.getElementById("price");
 const description = document.getElementById("description");
 const colorSelect = document.getElementById("colors");
+const itemQuantity = document.getElementById('quantity');
   
   // Get product ID from URL
   function getProductIdFromUrl() {
@@ -44,7 +45,11 @@ const colorSelect = document.getElementById("colors");
       }
     
       // Update DOM with product details
-      
+      const itemImg = document.querySelector(".item__img img");
+      const title = document.getElementById("title");
+      const price = document.getElementById("price");
+      const description = document.getElementById("description");
+
     
       // Set product details
       itemImg.src = product.imageUrl;
@@ -64,6 +69,7 @@ const colorSelect = document.getElementById("colors");
         option.value = color;
         option.textContent = color;
         colorSelect.appendChild(option);
+        
       });
     
       console.log("Product details rendered successfully.");
@@ -93,7 +99,8 @@ const colorSelect = document.getElementById("colors");
             name: product.name,
             price: product.price, 
             color: selectedColor,
-            quantity: quantity
+            quantity: quantity,
+            image: product.imageUrl
           });
           console.log("cart " + JSON.stringify(cart));
         }
@@ -128,3 +135,5 @@ const colorSelect = document.getElementById("colors");
 
   //how to get value of input elements inside the add to cart function to place the information in the cart
   // color and quantity check if id and color match 
+  //wrap cart.push in logic check same color and product id if same color and same ID increase quantity if not same color create new item in cart 
+  // array method to loop through array to check cart if id matches find ways to filter in arrays 
