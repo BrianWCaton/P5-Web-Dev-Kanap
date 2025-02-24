@@ -89,7 +89,6 @@ const itemQuantity = document.getElementById('quantity');
         const existingProductIndex = cart.findIndex((item) => item.id === product._id && item.color === selectedColor);
     console.log('existing product' + existingProductIndex);
         if (existingProductIndex !== -1) {
-          // If the product exists, increase the quantity
           cart[existingProductIndex].quantity += quantity;
           console.log("product exists in cart " + quantity );
         } else {
