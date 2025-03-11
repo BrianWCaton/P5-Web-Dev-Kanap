@@ -102,6 +102,7 @@ const itemQuantity = document.getElementById('quantity');
             image: product.imageUrl
           });
           console.log("cart " + JSON.stringify(cart));
+          alert('Item has been added to cart!')
         }
     
         // Save the updated cart back to local storage
