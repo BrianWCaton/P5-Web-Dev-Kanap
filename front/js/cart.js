@@ -78,3 +78,64 @@ function productExistsInCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   return cart.some(item => item.id === productId);
 }
+const orderForm = document.querySelector("#order-form");
+orderForm.addEventListener ('submit', async function(event){
+  event.preventDefault();
+  const firstName = document.getElementById('firstName');
+  const lastName = document.getElementById('lastName');
+  const address = document.getElementById('address');
+  const city = document.getElementById('city');
+  const email = document.getElementById('email');
+  
+  const customer = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    address: address.value,
+    city: city.value,
+    email: email.value
+  }
+  const cart = JSON.parse(localStorage.getItem('cart'));
+		
+		const cartProducts = [];
+		
+		if (cart.length === 0) {
+			return alert('Nothing in the cart.');
+		}
+		// for (let i = 0; i < cart.length; i++) {
+		// 	cartProducts.push(cart[i].productId);
+		// }
+
+cart.forEach(function(cartItem){
+  cartProducts.push(cartItem.productId);
+
+});
+
+  const order = {
+    contact: customer,
+    products: cartProducts,
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/api/products/order", {
+      method: 'POST',
+      body: JSON.stringify(order),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(JSON.stringify(data));
+    // window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
+    // clear local storage// 
+    // return true;
+  } catch (error) {
+    
+  }
+
+});
+

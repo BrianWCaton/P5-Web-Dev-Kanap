@@ -1,4 +1,6 @@
-window.location.href = `confirmation.html?orderId=${orderId}`;
+
+const orderId = getParameterByName('orderId'); 
+
 function getParameterByName(name) {
     const url = new URL(window.location.href); 
     return url.searchParams.get(name); 
@@ -10,7 +12,6 @@ function getProductIdFromUrl() {
     return params.get('id');
   }
 
-const orderId = getParameterByName('orderId'); 
 if (orderId) {
     const orderIdElement = document.getElementById('orderId'); 
     orderIdElement.textContent = orderId; 
