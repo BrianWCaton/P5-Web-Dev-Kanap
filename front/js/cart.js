@@ -87,6 +87,8 @@ orderForm.addEventListener ('submit', async function(event){
   const city = document.getElementById('city');
   const email = document.getElementById('email');
   
+  validateForm();
+
   const customer = {
     firstName: firstName.value,
     lastName: lastName.value,
@@ -138,4 +140,7 @@ cart.forEach(function(cartItem){
   }
 
 });
+
+
+
 
