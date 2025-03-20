@@ -2,9 +2,23 @@ function getCartFromLocalStorage() {
   return JSON.parse(localStorage.getItem('cart')) || []; 
 }
 
+const firstName = document.getElementById('firstName');
+const lastName = document.getElementById('lastName');
+const address = document.getElementById('address');
+const city = document.getElementById('city');
+const email = document.getElementById('email');
+
+// check if each INPUT is !blank 
+//=== blank display error message  
+// in event listener submit button clicked 
+
+function checkForm(){
+ if firstName.value === 
+
+}
+
 function displayCart() {
   const cartItems = getCartFromLocalStorage();
-  console.log(cartItems);
   const cartContainer = document.getElementById('cart__items');
   cartContainer.innerHTML = ''; 
 
@@ -81,11 +95,7 @@ function productExistsInCart(productId) {
 const orderForm = document.querySelector("#order-form");
 orderForm.addEventListener ('submit', async function(event){
   event.preventDefault();
-  const firstName = document.getElementById('firstName');
-  const lastName = document.getElementById('lastName');
-  const address = document.getElementById('address');
-  const city = document.getElementById('city');
-  const email = document.getElementById('email');
+
   
   const customer = {
     firstName: firstName.value,
@@ -106,7 +116,7 @@ orderForm.addEventListener ('submit', async function(event){
 		// }
 
 cart.forEach(function(cartItem){
-  cartProducts.push(cartItem.productId);
+  cartProducts.push(cartItem.id);
 
 });
 
@@ -129,10 +139,10 @@ cart.forEach(function(cartItem){
     }
 
     const data = await response.json();
-    console.log(JSON.stringify(data));
-    // window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
-    // clear local storage// 
-    // return true;
+    console.log("response from API "+JSON.stringify(data));
+     window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
+      localStorage.clear();
+    //  return true;
   } catch (error) {
     
   }
