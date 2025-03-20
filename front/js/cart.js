@@ -8,14 +8,16 @@ const address = document.getElementById('address');
 const city = document.getElementById('city');
 const email = document.getElementById('email');
 
+const formInputs =document.querySelectorAll(".formInput");
+
 // check if each INPUT is !blank 
 //=== blank display error message  
 // in event listener submit button clicked 
 
-function checkForm(){
- if firstName.value === 
+// function checkForm(){
+//  if firstName.value === 
 
-}
+// }
 
 function displayCart() {
   const cartItems = getCartFromLocalStorage();
@@ -92,6 +94,18 @@ function productExistsInCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   return cart.some(item => item.id === productId);
 }
+
+function validateForm(){
+  formInputs.forEach(function (formInput){
+      if (!formInput.value){
+        const errorMsg = formInput.nextElementSibling;
+        errorMsg.textContent = ` ${formInput.id} cannot be blank`;
+        errorMsg.style.display = "block";
+          
+      }
+  });
+}
+
 const orderForm = document.querySelector("#order-form");
 orderForm.addEventListener ('submit', async function(event){
   event.preventDefault();
@@ -142,7 +156,7 @@ cart.forEach(function(cartItem){
 
     const data = await response.json();
     console.log("response from API "+JSON.stringify(data));
-     window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
+    //  window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
       localStorage.clear();
     //  return true;
   } catch (error) {
