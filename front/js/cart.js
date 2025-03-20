@@ -156,7 +156,7 @@ cart.forEach(function(cartItem){
 
     const data = await response.json();
     console.log("response from API "+JSON.stringify(data));
-    //  window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
+    window.location.href=`./confirmation.html?orderId=${data.orderId}`; 
       localStorage.clear();
     //  return true;
   } catch (error) {
