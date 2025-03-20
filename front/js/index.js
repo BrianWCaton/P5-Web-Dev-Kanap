@@ -51,7 +51,13 @@ async function renderProducts() {
     });
 
 }
-
+function validateForm(){
+    inputs.forEach(function (input){
+        if (!input.value){
+            const 
+        }
+    });
+}
 renderProducts();
 
 

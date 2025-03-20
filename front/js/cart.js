@@ -97,6 +97,8 @@ orderForm.addEventListener ('submit', async function(event){
   event.preventDefault();
 
   
+  validateForm();
+
   const customer = {
     firstName: firstName.value,
     lastName: lastName.value,
@@ -148,4 +150,7 @@ cart.forEach(function(cartItem){
   }
 
 });
+
+
+
 
