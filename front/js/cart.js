@@ -10,15 +10,6 @@ const email = document.getElementById("email");
 
 const formInputs = document.querySelectorAll(".formInput");
 
-// check if each INPUT is !blank
-//=== blank display error message
-// in event listener submit button clicked
-
-// function checkForm(){
-//  if firstName.value ===
-
-// }
-
 function displayCart() {
   const cartItems = getCartFromLocalStorage();
   const cartContainer = document.getElementById("cart__items");
